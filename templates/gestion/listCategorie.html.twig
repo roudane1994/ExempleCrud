@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Creation d'un Categorie{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <br><br>
+   
+    <h2> Liste des Categories</h2>
+     <table class="table table-bordered">
+    <thead>
+      <tr align="center">
+          <th align="center">Id</th>
+        <th align="center">Name</th>
+        <th align="center">Supp</th>
+        <th align="center">Modefie</th>
+      </tr>
+    </thead>
+    <tbody>
+     {% for categorie in categories %}
+      <tr align="center">
+        <td>{{categorie.id}}</td>
+        <td>{{categorie.name}}</td>
+        <td><a href="{{ path('suppCategorie', {'id':categorie.id}) }}">supp</a></td>
+         <td><a href="{{ path('creeCategorie', {'id':categorie.id}) }}">modefie</a></td>
+      </tr>
+       {% endfor %}
+    </tbody>
+  </table>
+    <div class="navigation">
+    {{ knp_pagination_render(categories) }}
+</div>
+</div>
+
+
+{% endblock %}
