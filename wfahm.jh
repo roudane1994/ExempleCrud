@@ -1,0 +1,74 @@
+entity Fournisseur {
+	libelle String
+}
+
+entity Demande{
+ numero Integer,
+ rtr String,
+ rtrLibelle String,
+ objet String,
+ description String,
+ dateBesion LocalDate,
+ dateCreation LocalDate,
+ createur String,
+ budget Double,
+ affectationLibelle String,
+ dateAffictation LocalDate,
+ moreInformation String,
+ etat String,
+ messageValidation String,
+ messageClouture String,
+ dateClouture LocalDate,
+ meilleurPrixMagasin Double,
+ prixNegocie Double
+}
+
+entity DemandeInfo{
+nordre Integer,
+infoDemande String,
+reponse String,
+dateDemande LocalDate,
+dateReponse LocalDate
+}
+
+entity PieceJoindre{
+nordre Integer,
+name String,
+url String
+}
+
+entity MagasinUtilisateur{
+ nordre Integer,
+ utilisateur String
+}
+
+entity Magasin{
+ code String,
+ libelle String,
+ rtr String
+}
+
+entity Objet{
+ objet String
+}
+
+relationship OneToMany {
+  Magasin to Demande{magasin},
+  Magasin to MagasinUtilisateur{magasin},
+  Fournisseur to Demande{fournisseurMagasin},
+  Fournisseur to  Demande{FournisseurFinal},
+  Demande to DemandeInfo{demande},
+  Demande to PieceJoindre{demande},
+  
+}
+
+relationship ManyToOne{
+  Demande{demandeInfos} to DemandeInfo,
+  Demande{pieceJoindres} to PieceJoindre,
+  Magasin{magasinUtilisateurs} to MagasinUtilisateur ,
+  Magasin{demandes} to Demande,
+  Fournisseur{demandePourFournisseurMagasin} to Demande,
+  Fournisseur{demandePourFournisseurFinal} to Demande,
+
+}
+
